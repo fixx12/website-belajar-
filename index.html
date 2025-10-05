@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fii Community - Belajar Programming Mudah</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2>Fii Community</h2>
+            <p>Memuat pengetahuan programming...</p>
+        </div>
+    </div>
+
+    <!-- Background Effects -->
+    <div class="background-effects">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="logo-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <span>FiiBot</span>
+        </div>
+        <div class="nav-menu">
+            <a href="#home" class="nav-link active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#tutorial" class="nav-link">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Tutorial</span>
+            </a>
+            <a href="#chat" class="nav-link">
+                <i class="fas fa-comments"></i>
+                <span>Chat AI</span>
+            </a>
+            <a href="#resources" class="nav-link">
+                <i class="fas fa-download"></i>
+                <span>Resources</span>
+            </a>
+        </div>
+        <div class="nav-actions">
+            <button class="login-btn" id="loginBtn">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Login</span>
+            </button>
+            <div class="user-menu" id="userMenu" style="display: none;">
+                <img src="" alt="User" class="user-avatar" id="userAvatar">
+                <span class="user-name" id="userName"></span>
+                <div class="user-dropdown">
+                    <a href="#" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                    <a href="#" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="#" class="dropdown-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <button class="close-modal" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="login-header">
+                <h2>Welcome to Fii Community! 👋</h2>
+                <p>Login untuk akses semua fitur premium</p>
+            </div>
+            <div class="login-options">
+                <button class="login-option-btn google-login" id="googleLogin">
+                    <i class="fab fa-google"></i>
+                    Continue with Google
+                </button>
+                <button class="login-option-btn github-login" id="githubLogin">
+                    <i class="fab fa-github"></i>
+                    Continue with GitHub
+                </button>
+                <button class="login-option-btn email-login" id="emailLogin">
+                    <i class="fas fa-envelope"></i>
+                    Continue with Email
+                </button>
+            </div>
+            <div class="login-footer">
+                <p>Dengan login, kamu menyetujui <a href="#">Syarat & Ketentuan</a> kami</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="welcome-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Komunitas Programming Terbaik</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Welcome to 
+                    <span class="gradient-text">Fii Community</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Tempat belajar programming dan bot development dengan metode yang <strong>mudah dipahami</strong> dan <strong>menyenangkan</strong>. Bersama Fii (RafiFirmansyah), kamu akan menguasai keterampilan programming dari dasar hingga advanced dengan penjelasan yang detail dan contoh code yang praktis!
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Active Members</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Tutorials</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support</div>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="https://chat.whatsapp.com/HXznrPQquQL3eDRKwBNMQH" class="cta-btn primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Join Grup WA
+                    </a>
+                    <a href="#tutorial" class="cta-btn secondary">
+                        <i class="fas fa-play"></i>
+                        Mulai Belajar Sekarang
+                    </a>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-image-container">
+                            <img src="https://raw.githubusercontent.com/fixx12/-/main/IMG-20250802-WA0143.jpg" 
+                                 alt="Fii - Bot Developer" 
+                                 class="profile-image"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                            <div class="profile-status">
+                                <div class="status-dot"></div>
+                                <span>Online</span>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-info">
+                            <h2 class="profile-name">Fii (RafiFirmansyah)</h2>
+                            <p class="profile-title">Full Stack Developer & Bot Specialist</p>
+                            <div class="profile-badges">
+                                <span class="badge">JavaScript Expert</span>
+                                <span class="badge">Node.js Developer</span>
+                                <span class="badge">Bot Creator</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-quote">
+                        <i class="fas fa-quote-left"></i>
+                        <p>"Bersama kita wujudkan mimpi menjadi developer handal! Di sini kamu akan belajar dengan metode step-by-step yang mudah dipahami, dari basic concepts sampai advanced techniques. Mari bangun karir programming-mu bersama Fii Community!"</p>
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="social-links">
+                        <a href="https://github.com/fixx12" class="social-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.instagram.com/rfiifrmnsyh" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://wa.me/6287881928428" class="social-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                        <a href="https://whatsapp.com/channel/0029VbAjQFa11ulWyLM3gU3T" class="social-link" target="_blank">
+                            <i class="fas fa-broadcast-tower"></i>
+                            <span>Channel WA</span>
+                        </a>
+                    </div>
+                    
+                            <!-- Music Player -->
+                    <div class="music-player">
+                        <div class="music-header">
+                            <i class="fas fa-music"></i>
+                            <span>Now Playing</span>
+                        </div>
+                        <div class="music-info">
+                            <div class="song-info">
+                                <div class="song-name">DJ Fii Mix - Lofi Coding Session</div>
+                                <div class="song-artist">Fii Community • Loop Enabled</div>
+                            </div>
+                            <div class="music-controls">
+                                <button class="music-btn" id="prev-btn">
+                                    <i class="fas fa-step-backward"></i>
+                                </button>
+                                <button class="music-btn play-btn" id="play-btn">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="music-btn" id="next-btn">
+                                    <i class="fas fa-step-forward"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="music-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                        </div>
+                        <audio id="main-audio" loop>
+                            <source src="https://github.com/lw629303-web/Musik/raw/1d230ea743254982e07086d0fa5c0ee836df8e2a/DJ%20TABOLA%20BALE%20X%20LAMPU%20KAKA%20VIRAL%20TIKTOK%20FULL%20SONG%20TERBARU%202025__%20%5BHzeP3agq2Zs%5D.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutorial Section -->
+    <section id="tutorial" class="tutorial">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🚀 Pathway Belajar Programming</h2>
+                <p class="section-subtitle">Pilih jalur belajar sesuai minatmu. Setiap materi dirancang khusus untuk pemula dengan penjelasan step-by-step yang detail dan mudah dipahami. Mulai dari fundamental sampai project nyata!</p>
+            </div>
+            
+            <div class="learning-pathways">
+                <div class="pathway-card" data-pathway="frontend">
+                    <div class="pathway-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Frontend Development</h3>
+                    <p>Pelajari HTML, CSS, JavaScript modern untuk membuat website yang interaktif, responsive, dan user-friendly. Kuasai framework seperti React dan Vue.js.</p>
+                    <div class="pathway-features">
+                        <span><i class="fas fa-check"></i> HTML5 & CSS3</span>
+                        <span><i class="fas fa-check"></i> JavaScript ES6+</span>
+                        <span><i class="fas fa-check"></i> React.js</span>
+                        <span><i class="fas fa-check"></i> Responsive Design</span>
+                    </div>
+                    <div class="pathway-duration">
+                        <i class="fas fa-clock"></i>
+                        <span>8 Minggu • 40+ Lessons</span>
+                    </div>
+                    <button class="pathway-btn" onclick="showPathway('frontend')">
+                        <i class="fas fa-play-circle"></i>
+                        Mulai Belajar
+                    </button>
+                </div>
+                
+                <div class="pathway-card" data-pathway="backend">
+                    <div class="pathway-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Backend Development</h3>
+                    <p>Kuasai Node.js, Express, Database untuk membangun sistem server yang powerful. Pelajari REST API, Authentication, dan Deployment.</p>
+                    <div class="pathway-features">
+                        <span><i class="fas fa-check"></i> Node.js & Express</span>
+                        <span><i class="fas fa-check"></i> MongoDB & MySQL</span>
+                        <span><i class="fas fa-check"></i> REST API</span>
+                        <span><i class="fas fa-check"></i> JWT Authentication</span>
+                    </div>
+                    <div class="pathway-duration">
+                        <i class="fas fa-clock"></i>
+                        <span>10 Minggu • 50+ Lessons</span>
+                    </div>
+                    <button class="pathway-btn" onclick="showPathway('backend')">
+                        <i class="fas fa-play-circle"></i>
+                        Mulai Belajar
+                    </button>
+                </div>
+
+                <div class="pathway-card" data-pathway="bot">
+                    <div class="pathway-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Bot Development</h3>
+                    <p>Buat bot WhatsApp, Telegram, dan Discord dengan berbagai fitur canggih. Pelajari automation, API integration, dan deployment.</p>
+                    <div class="pathway-features">
+                        <span><i class="fas fa-check"></i> WhatsApp Bot</span>
+                        <span><i class="fas fa-check"></i> Telegram Bot</span>
+                        <span><i class="fas fa-check"></i> Discord Bot</span>
+                        <span><i class="fas fa-check"></i> API Integration</span>
+                    </div>
+                    <div class="pathway-duration">
+                        <i class="fas fa-clock"></i>
+                        <span>6 Minggu • 30+ Lessons</span>
+                    </div>
+                    <button class="pathway-btn" onclick="showPathway('bot')">
+                        <i class="fas fa-play-circle"></i>
+                        Mulai Belajar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Start Tutorials -->
+            <div class="quick-tutorials">
+                <h3>🎯 Quick Start - Belajar dalam 5 Menit</h3>
+                <div class="tutorial-grid">
+                    <div class="tutorial-item" onclick="showTutorial('javascript-basic')">
+                        <div class="tutorial-icon">
+                            <i class="fab fa-js-square"></i>
+                        </div>
+                        <h4>JavaScript Dasar</h4>
+                        <p>Pahami fundamental JavaScript dalam 5 menit</p>
+                        <span class="tutorial-time">5 min read</span>
+                    </div>
+                    <div class="tutorial-item" onclick="showTutorial('whatsapp-bot')">
+                        <div class="tutorial-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h4>Bot WhatsApp</h4>
+                        <p>Buat bot WhatsApp pertama kamu</p>
+                        <span class="tutorial-time">10 min read</span>
+                    </div>
+                    <div class="tutorial-item" onclick="showTutorial('html-css')">
+                        <div class="tutorial-icon">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <h4>HTML & CSS</h4>
+                        <p>Mulai membuat website sederhana</p>
+                        <span class="tutorial-time">8 min read</span>
+                    </div>
+                    <div class="tutorial-item" onclick="showTutorial('nodejs')">
+                        <div class="tutorial-icon">
+                            <i class="fab fa-node-js"></i>
+                        </div>
+                        <h4>Node.js Basic</h4>
+                        <p>Pengenalan Node.js untuk pemula</p>
+                        <span class="tutorial-time">6 min read</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat Section -->
+    <section id="chat" class="ai-chat">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">💬 Chat dengan BotFiiv12</h2>
+                <p class="section-subtitle">Tanya apapun tentang programming! AI assistant ini akan membantumu memahami konsep dengan penjelasan yang jelas dan detail. Dari basic sampai advanced topics!</p>
+            </div>
+            
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="bot-identity">
+                        <div class="bot-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="bot-info">
+                            <h3>BotFiiv12</h3>
+                            <p>AI Assistant Ciptaan Fii • Online</p>
+                        </div>
+                    </div>
+                    <div class="chat-status">
+                        <div class="status-indicator"></div>
+                        <span>Fast Response</span>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message bot-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>👋 <strong>Halo! Saya BotFiiv12</strong>, asisten AI canggih ciptaan <strong>Fii (RafiFirmansyah)</strong>!</p>
+                            <p>Saya siap membantu kamu belajar programming dan bot development. Saya bisa menjelaskan:</p>
+                            <ul>
+                                <li>🎯 <strong>Konsep Programming</strong> - JavaScript, Node.js, dll</li>
+                                <li>🤖 <strong>Bot Development</strong> - WhatsApp, Telegram, Discord</li>
+                                <li>🔧 <strong>Problem Solving</strong> - Debugging & error handling</li>
+                                <li>🚀 <strong>Best Practices</strong> - Coding standards & tips</li>
+                            </ul>
+                            <p>Apa yang ingin kamu pelajari hari ini? 😊</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-questions">
+                    <div class="questions-title">💡 Pertanyaan Cepat:</div>
+                    <div class="questions-grid">
+                        <button class="question-btn" data-question="Apa itu bahasa pemrograman?">
+                            <i class="fas fa-laptop-code"></i>
+                            Apa itu Programming?
+                        </button>
+                        <button class="question-btn" data-question="Cara membuat website sederhana?">
+                            <i class="fas fa-globe"></i>
+                            Website Sederhana
+                        </button>
+                        <button class="question-btn" data-question="Cara membuat bot WhatsApp?">
+                            <i class="fab fa-whatsapp"></i>
+                            Bot WhatsApp
+                        </button>
+                        <button class="question-btn" data-question="Apa perbedaan let, const, dan var?">
+                            <i class="fas fa-code"></i>
+                            Let vs Const vs Var
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <input type="text" id="user-input" placeholder="Ketik pertanyaanmu tentang programming di sini... Contoh: 'Apa itu JavaScript?'" maxlength="500">
+                        <button id="send-btn" class="send-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="input-hint">
+                        <i class="fas fa-lightbulb"></i>
+                        Tekan Enter untuk mengirim • Tanya apapun tentang programming!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Resources Section -->
+    <section id="resources" class="resources">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📚 Learning Resources</h2>
+                <p class="section-subtitle">Download materi belajar, code snippets, dan tools yang akan mempercepat perjalanan programming-mu. Semua resources gratis untuk member Fii Community!</p>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <h3>Starter Templates</h3>
+                    <p>Kumpulan template siap pakai untuk project bot WhatsApp, web development, dan API services. Perfect untuk mulai project baru!</p>
+                    <ul class="resource-features">
+                        <li><i class="fas fa-check"></i> WhatsApp Bot Base</li>
+                        <li><i class="fas fa-check"></i> Express.js API Template</li>
+                        <li><i class="fas fa-check"></i> Frontend Starter Kit</li>
+                        <li><i class="fas fa-check"></i> Database Config</li>
+                    </ul>
+                    <a href="#" class="download-btn" onclick="downloadResource('templates')">
+                        <i class="fas fa-download"></i>
+                        Download Starter Pack
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>E-Book Collection</h3>
+                    <p>Kumpulan e-book programming terpilih yang cocok untuk pemula sampai advanced developer. Semua dalam bahasa Indonesia!</p>
+                    <ul class="resource-features">
+                        <li><i class="fas fa-check"></i> JavaScript Modern Guide</li>
+                        <li><i class="fas fa-check"></i> Node.js Complete Handbook</li>
+                        <li><i class="fas fa-check"></i> Bot Development Bible</li>
+                        <li><i class="fas fa-check"></i> API Design Patterns</li>
+                    </ul>
+                    <a href="#" class="download-btn" onclick="downloadResource('ebooks')">
+                        <i class="fas fa-download"></i>
+                        Download E-Books
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Development Tools</h3>
+                    <p>Kumpulan tools dan utilities yang akan membuat development process lebih efisien. Includes VS Code snippets dan config files.</p>
+                    <ul class="resource-features">
+                        <li><i class="fas fa-check"></i> VS Code Snippets</li>
+                        <li><i class="fas fa-check"></i> Config Templates</li>
+                        <li><i class="fas fa-check"></i> Debugging Tools</li>
+                        <li><i class="fas fa-check"></i> Performance Optimizer</li>
+                    </ul>
+                    <a href="#" class="download-btn" onclick="downloadResource('tools')">
+                        <i class="fas fa-download"></i>
+                        Download Tools Pack
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="community">
+        <div class="container">
+            <div class="community-content">
+                <h2>🚀 Gabung Komunitas Fii Sekarang!</h2>
+                <p>Bergabunglah dengan ratusan developer lainnya yang sedang belajar dan berkembang bersama. Dapatkan bantuan langsung, share project, dan tingkatkan skill programming-mu dengan support dari komunitas yang aktif dan friendly!</p>
+                
+                <div class="community-stats">
+                    <div class="community-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Active Members</div>
+                        </div>
+                    </div>
+                    <div class="community-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">1K+</div>
+                            <div class="stat-label">Daily Messages</div>
+                        </div>
+                    </div>
+                    <div class="community-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Projects Shared</div>
+                        </div>
+                    </div>
+                    <div class="community-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Tutorials</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="join-buttons">
+                    <a href="https://chat.whatsapp.com/HXznrPQquQL3eDRKwBNMQH" class="join-btn primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Join WhatsApp Group
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029VbAjQFa11ulWyLM3gU3T" class="join-btn secondary" target="_blank">
+                        <i class="fas fa-broadcast-tower"></i>
+                        Follow WhatsApp Channel
+                    </a>
+                </div>
+
+                <div class="community-features">
+                    <div class="feature">
+                        <i class="fas fa-handshake"></i>
+                        <h4>Support 24/7</h4>
+                        <p>Dapatkan bantuan kapan saja dari member lain dan Fii</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-code"></i>
+                        <h4>Code Review</h4>
+                        <p>Minta review code dan tips improvement</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-project-diagram"></i>
+                        <h4>Collaboration</h4>
+                        <p>Kerjasama dalam project opensource</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Donation Card -->
+<section style="display: flex; justify-content: center; align-items: center; padding: 40px; background: linear-gradient(135deg, #2b1a47, #3b185f);">
+  <div class="donation-card" 
+       style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 20px; padding: 20px; max-width: 320px; text-align: center; box-shadow: 0 4px 15px rgba(120, 40, 200, 0.4);">
+       
+    <div class="donation-header" 
+         style="font-size: 1.2rem; font-weight: 600; margin-bottom: 10px; color: #e0b3ff;">
+      💖 Dukung Fii Community
+    </div>
+
+    <p class="donation-text" 
+       style="font-size: 0.9rem; color: #d9c7ff; margin-bottom: 15px; line-height: 1.4;">
+      Bantu kami terus berkembang dan menyediakan konten berkualitas gratis untuk semua. Setiap donasi sangat berarti!
+    </p>
+
+    <img src="https://raw.githubusercontent.com/fixx12/dana-payment-/05fe90616049e2e463693f290635fe6d8d1fb5ff/IMG_20251005_011743.jpg" 
+         alt="Dana QR" 
+         class="donation-image"
+         style="width: 160px; height: auto; display: block; margin: 0 auto 15px auto; border-radius: 10px; box-shadow: 0 0 12px rgba(183, 84, 255, 0.6);">
+
+    <button class="donation-btn"
+            onclick="alert('Terima kasih atas dukunganmu! \n\nScan QR code di atas atau transfer ke:\nDANA: 087881928428')"
+            style="background: linear-gradient(135deg, #b84cff, #8a2be2); color: white; border: none; padding: 10px 16px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; transition: 0.3s;">
+      <i class="fas fa-heart"></i> Donasi Sekarang
+    </button>
+  </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fas fa-robot"></i>
+                        <span>Fii Community</span>
+                    </div>
+                    <p>Platform belajar programming terbaik dengan pendekatan yang mudah dan menyenangkan. Bersama Fii (RafiFirmansyah), jadi developer handal itu mungkin!</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/fixx12" class="social-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.instagram.com/rfiifrmnsyh" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/6287881928428" class="social-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Belajar</h4>
+                        <a href="#tutorial">Tutorial</a>
+                        <a href="#resources">Resources</a>
+                        <a href="#chat">AI Assistant</a>
+                        <a href="#community">Community</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Komunitas</h4>
+                        <a href="https://chat.whatsapp.com/HXznrPQquQL3eDRKwBNMQH" target="_blank">WhatsApp Group</a>
+                        <a href="https://whatsapp.com/channel/0029VbAjQFa11ulWyLM3gU3T" target="_blank">WhatsApp Channel</a>
+                        <a href="https://github.com/fixx12" target="_blank">GitHub</a>
+                        <a href="https://www.instagram.com/rfiifrmnsyh" target="_blank">Instagram</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Support</h4>
+                        <a href="https://wa.me/6287881928428" target="_blank">Contact Fii</a>
+                        <a href="#chat">Bantuan AI</a>
+                        <a href="#resources">Download Resources</a>
+                        <a href="#" onclick="showLoginModal()">Login</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Fii Community. Dibuat dengan ❤️ oleh Fii (Rafi Firmansyah)</p>
+                <p>"Bersama kita wujudkan mimpi menjadi developer handal! Terus belajar dan jangan pernah menyerah!"</p>
+            </div>
+        </div>
+    </footer>
+    
+        <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>
